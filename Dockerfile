@@ -11,13 +11,10 @@ RUN apt-get install -y git
 # install domserver packages
 RUN apt-get install -y gcc g++ make zip unzip mysql-server \
 	    apache2 php5 php5-cli libapache2-mod-php5 php5-mysql php5-json \
-	    phpmyadmin ntp \
+	    bsdmainutils phpmyadmin ntp \
 	    libboost-regex-dev libgmp3-dev linuxdoc-tools linuxdoc-tools-text \
 	    groff texlive-latex-recommended texlive-latex-extra \
 	    texlive-fonts-recommended texlive-lang-dutch
-
-# install hexdump FIXME
-RUN apt-get install -y bsdmainutils
 
 # install packages for submit client
 RUN apt-get install -y libcurl4-gnutls-dev libjsoncpp-dev libmagic-dev
@@ -29,7 +26,9 @@ RUN apt-get install -y autoconf automake flexc++ bisonc++
 RUN apt-get install -y debootstrap wget
 
 # install judgehost packages
-RUN apt-get install -y make sudo php5-cli php5-curl php5-json procps gcc g++ openjdk-6-jre-headless openjdk-6-jdk ghc fp-compiler # FIXME gcj
+RUN apt-get install -y make sudo php5-cli php5-curl php5-json procps \
+        gcc g++ gcj-jre-headless gcj-jdk openjdk-7-jre-headless openjdk-7-jdk \
+        ghc fp-compiler
 
 # install cgroups packages
 RUN apt-get install -y libcgroup-dev cgroup-bin
