@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -d domjudge.git ]; then
+	git clone --bare https://github.com/DOMjudge/domjudge.git
+fi
+
+cd domjudge.git
+git fetch
+cd ..
+tar czf domjudge.git.tgz domjudge.git
+
+docker build -t domjudge .
