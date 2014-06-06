@@ -28,7 +28,6 @@ done
 # setup database and add special team user
 # FIXME: user random password
 cd /opt/domjudge/domserver
-cp /domjudge-src/etc/restapi.secret etc/
 bin/dj-setup-database install
 echo "INSERT INTO user (userid, username, name, password, teamid) VALUES (3, 'dummy', 'dummy user for example team'    , MD5('dummy#dummy'), 2)" | mysql domjudge
 echo "INSERT INTO userrole (userid, roleid) VALUES (3, 3);" | mysql domjudge
@@ -47,7 +46,5 @@ cd /domjudge-src/
 su domjudge -c 'make judgehost'
 make install-judgehost
 cd /opt/domjudge/judgehost/
-cp /domjudge-src/etc/restapi.secret etc/ # FIXME
-chown domjudge etc/restapi.secret
 cp /opt/domjudge/judgehost/etc/sudoers-domjudge /etc/sudoers.d/
 sed -i -e "s/''/'chroot-startstop.sh'/" etc/judgehost-config.php # FIXME
