@@ -34,14 +34,14 @@ RUN apt-get install -y make sudo php5-cli php5-curl php5-json procps \
 RUN apt-get install -y libcgroup-dev cgroup-bin
 
 # ADD repo and install script
-ADD domjudge.git.tgz /
+ADD domjudge.git.tar /
 ADD install.sh /install.sh
 RUN /install.sh
 
-# forward port to the outside world
-EXPOSE 80
-
-# add test and run scripts and set entrypoint
+# add test and run scripts
 ADD run.sh /run.sh
 ADD test.sh /test.sh
+
+# forward port to the outside world and set entrypoint
+EXPOSE 80
 ENTRYPOINT ["/run.sh"]

@@ -6,8 +6,15 @@ fi
 
 cd domjudge.git
 git fetch
+
+# this resets the date of FETCH_HEAD for further caching
+lastcommitdate=`git show -s --format=%ct HEAD`
+touch -d@$lastcommitdate FETCH_HEAD
+
 cd ..
-tar czf domjudge.git.tgz domjudge.git
+tar cf domjudge.git.tar domjudge.git
+# this resets the date of the tgz file
+touch -d@$lastcommitdate domjudge.git.tar
 
 docker="/usr/bin/docker"
 if [ -x "/usr/bin/docker.io" ]; then
