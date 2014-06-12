@@ -1,11 +1,17 @@
 #!/bin/sh
 
+repo="https://github.com/DOMjudge/domjudge.git"
+
+if [ -n "$1" ]; then
+	repo=$1
+fi
+
 if [ ! -d domjudge.git ]; then
-	git clone --bare https://github.com/DOMjudge/domjudge.git
+	git clone --bare $repo
 fi
 
 cd domjudge.git
-git fetch
+git fetch $repo
 
 # this resets the date of FETCH_HEAD for further caching
 lastcommitdate=`git show -s --format=%ct HEAD`
