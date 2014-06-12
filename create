@@ -9,4 +9,9 @@ git fetch
 cd ..
 tar czf domjudge.git.tgz domjudge.git
 
-docker build -t domjudge .
+docker="/usr/bin/docker"
+if [ -x "/usr/bin/docker.io" ]; then
+	# debian/Ubuntu uses docker.io instead of docker
+	docker="/usr/bin/docker.io"
+fi
+$docker build -t domjudge .
