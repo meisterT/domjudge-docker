@@ -22,11 +22,8 @@ RUN apt-get install -y libcurl4-gnutls-dev libjsoncpp-dev libmagic-dev
 # install additional packages for bootstrapping
 RUN apt-get install -y autoconf automake flexc++ bisonc++
 
-# install deboostrap+wget for chroot building # FIXME
-RUN apt-get install -y debootstrap wget
-
 # install judgehost packages
-RUN apt-get install -y make sudo php5-cli php5-curl php5-json procps \
+RUN apt-get install -y make sudo debootstrap php5-cli php5-curl php5-json procps \
         gcc g++ gcj-jre-headless gcj-jdk openjdk-7-jre-headless openjdk-7-jdk \
         ghc fp-compiler
 
