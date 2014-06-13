@@ -14,7 +14,7 @@ if [ ! -d domjudge.git ]; then
 fi
 
 cd domjudge.git
-git fetch $repo
+git fetch $repo master:master
 
 # this resets the date of FETCH_HEAD for further caching
 lastcommitdate=`git show -s --format=%ct HEAD`
