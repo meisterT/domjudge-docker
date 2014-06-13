@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e
+set -x
 
 repo="https://github.com/DOMjudge/domjudge.git"
 
@@ -17,10 +20,29 @@ git fetch $repo
 lastcommitdate=`git show -s --format=%ct HEAD`
 touch -d@$lastcommitdate FETCH_HEAD
 
+git show HEAD:misc-tools/dj_make_chroot > ../dj_make_chroot.tmp
+
 cd ..
+
 tar cf domjudge.git.tar domjudge.git
 # this resets the date of the tgz file
 touch -d@$lastcommitdate domjudge.git.tar
+
+set +e
+diff dj_make_chroot dj_make_chroot.tmp
+status=$?
+set -e
+if [ $status == 0 ]; then
+	rm dj_make_chroot.tmp
+else
+	mv dj_make_chroot.tmp dj_make_chroot
+	chmod +x dj_make_chroot
+	sudo rm -rf djchroot
+	sudo ./dj_make_chroot djchroot amd64
+	sudo rm -f djchroot.tar
+	sudo chown -R $USER djchroot
+	tar cf djchroot.tar djchroot
+fi
 
 docker="/usr/bin/docker"
 if [ -x "/usr/bin/docker.io" ]; then

@@ -33,7 +33,11 @@ RUN apt-get install -y make sudo php5-cli php5-curl php5-json procps \
 # install cgroups packages
 RUN apt-get install -y libcgroup-dev cgroup-bin
 
-# ADD repo and install script
+# add and fix chroot
+ADD djchroot.tar /
+RUN mkdir /chroot && mv /djchroot /chroot/domjudge && chown -R root /chroot
+
+# add repo and install script
 ADD domjudge.git.tar /
 ADD install.sh /install.sh
 RUN /install.sh
