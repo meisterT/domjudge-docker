@@ -10,7 +10,7 @@ if [ -n "$1" ]; then
 fi
 
 if [ ! -d domjudge.git ]; then
-	git clone --bare $repo
+	git clone --bare $repo domjudge.git
 fi
 
 cd domjudge.git
