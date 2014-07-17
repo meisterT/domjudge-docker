@@ -37,11 +37,11 @@ if [ $status == 0 ]; then
 else
 	mv dj_make_chroot.tmp dj_make_chroot
 	chmod +x dj_make_chroot
-	sudo rm -rf djchroot
 	sudo ./dj_make_chroot djchroot amd64
 	sudo rm -f djchroot.tar
 	sudo chown -R $USER djchroot
 	tar cf djchroot.tar djchroot
+	sudo rm -rf djchroot
 fi
 
 docker="/usr/bin/docker"
