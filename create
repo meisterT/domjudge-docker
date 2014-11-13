@@ -29,7 +29,7 @@ tar cf domjudge.git.tar domjudge.git
 touch -d@$lastcommitdate domjudge.git.tar
 
 set +e
-diff dj_make_chroot dj_make_chroot.tmp
+diff -q dj_make_chroot dj_make_chroot.tmp
 status=$?
 set -e
 if [ $status == 0 ]; then
