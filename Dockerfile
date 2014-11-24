@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # install necessary packages
 RUN apt-get update
-RUN apt-get install -y git
+RUN apt-get install -y git vim
 
 # install domserver packages
 RUN apt-get install -y gcc g++ make zip unzip mysql-server \
