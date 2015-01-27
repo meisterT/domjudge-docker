@@ -8,7 +8,7 @@ done
 
 # submit test programs
 cd /domjudge-src/tests
-make test-normal
+make check test-stress
 
 # setup cgroups and chroot
 cd /opt/domjudge/judgehost
