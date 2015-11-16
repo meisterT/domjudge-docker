@@ -20,7 +20,7 @@ git fetch $repo master:master
 lastcommitdate=`git show -s --format=%ct HEAD`
 touch -d@$lastcommitdate FETCH_HEAD
 
-git show HEAD:misc-tools/dj_make_chroot > ../dj_make_chroot.tmp
+git show HEAD:misc-tools/dj_make_chroot.in > ../dj_make_chroot.tmp
 
 cd ..
 
@@ -37,7 +37,7 @@ if [ $status == 0 ]; then
 else
 	mv dj_make_chroot.tmp dj_make_chroot
 	chmod +x dj_make_chroot
-	sudo ./dj_make_chroot djchroot amd64
+	sudo ./dj_make_chroot -d djchroot -a amd64
 	sudo rm -f djchroot.tar
 	sudo chown -R $USER djchroot
 	tar cf djchroot.tar djchroot
