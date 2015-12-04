@@ -30,6 +30,7 @@ done
 cd /opt/domjudge/domserver
 bin/dj-setup-database install
 echo "INSERT INTO user (userid, username, name, password, teamid) VALUES (3, 'dummy', 'dummy user for example team'    , MD5('dummy#dummy'), 2)" | mysql domjudge
+echo "INSERT INTO userrole (userid, roleid) VALUES (3, 2);" | mysql domjudge
 echo "INSERT INTO userrole (userid, roleid) VALUES (3, 3);" | mysql domjudge
 
 mysqladmin shutdown
