@@ -5,6 +5,7 @@ set -x
 
 # add non-privileged user for running judgedaemons
 adduser --disabled-password domjudge
+groupadd domjudge-run
 
 # create our own copy of the source code
 git clone /domjudge.git /domjudge-src
@@ -28,19 +29,17 @@ done
 # setup database and add special team user
 # FIXME: user random password
 cd /opt/domjudge/domserver
-bin/dj-setup-database install
-echo "INSERT INTO user (userid, username, name, password, teamid) VALUES (3, 'dummy', 'dummy user for example team'    , MD5('dummy#dummy'), 2)" | mysql domjudge
-echo "INSERT INTO userrole (userid, roleid) VALUES (3, 2);" | mysql domjudge
+bin/dj_setup_database install
+echo 'INSERT INTO user (userid, username, name, password, teamid) VALUES (3, "dummy", "dummy user for example team", "$2y$10$..uuk/OfkCe.H6xDocWvgOwT5AvrYKQk4lo0s25iZHGPrcLzru3xS", 2)' | mysql domjudge
 echo "INSERT INTO userrole (userid, roleid) VALUES (3, 3);" | mysql domjudge
 
 mysqladmin shutdown
 
 echo "machine localhost login dummy password dummy" > ~/.netrc
-cp /opt/domjudge/domserver/etc/apache.conf /etc/apache2/conf.d/
+cp /opt/domjudge/domserver/etc/apache.conf /etc/apache2/conf-enabled/
 
-# add users judgedaemons (FIXME: make them configurable)
-useradd -d /nonexistent -g nogroup -s /bin/false domjudge-run-0
-useradd -d /nonexistent -g nogroup -s /bin/false domjudge-run-1
+# add users for judgedaemons (FIXME: make them configurable)
+useradd -d /nonexistent -g nogroup -s /bin/false domjudge-run
 
 # make and install judgehost
 cd /domjudge-src/
