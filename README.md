@@ -1,7 +1,7 @@
 domjudge-docker
 ===============
 
-**WARNING: this is not (yet) meant to be used for more than demo and testing -- don't use for real contests**
+**WARNING: You probably want to use https://hub.docker.com/r/domjudge/domserver instead **
 
 Requirements:
 * recent version of docker
